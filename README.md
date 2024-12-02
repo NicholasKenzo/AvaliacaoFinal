@@ -174,6 +174,3 @@ Nome: Base Líquida Matte, Categoria: Beleza, Preço: 29.99
    - Adicionar suporte para novas categorias dinamicamente.
 
 --- 
-
-## Licença
-Este projeto é de uso livre. Use-o como quiser! 😊
