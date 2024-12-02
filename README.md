@@ -1,6 +1,7 @@
 # AvaliacaoFinal
 
-Sistema de Gerenciamento de Produtos
+# Sistema de Gerenciamento de Produtos
+
 Este projeto é um sistema simples de gerenciamento de produtos, desenvolvido em C. Ele permite realizar as seguintes operações em um catálogo de produtos:
 
 Inserir novos produtos.
