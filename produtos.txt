@@ -1,0 +1,100 @@
+Smartphone Galaxy,Eletrônicos,1999.99
+Smart TV 4K,Eletrônicos,3299.99
+Notebook Dell,Eletrônicos,4500.00
+Fritadeira Airfryer,Eletrodomésticos,499.99
+Geladeira Frost Free,Eletrodomésticos,2999.99
+Microondas Panasonic,Eletrodomésticos,749.99
+Base Líquida Matte,Beleza,29.99
+Batom Vermelho,Beleza,19.99
+Perfume Masculino,Beleza,149.99
+Creme Hidratante,Beleza,24.99
+Arroz Branco 5kg,Alimentos,19.99
+Feijão Carioca 1kg,Alimentos,6.99
+Óleo de Soja 900ml,Alimentos,7.49
+Macarrão Espaguete,Alimentos,3.99
+Suco de Laranja 1L,Bebidas,4.99
+Cerveja Pilsen,Bebidas,3.99
+Vinho Tinto Seco,Bebidas,49.99
+Água Mineral 1.5L,Bebidas,2.49
+Camiseta Algodão,Roupas,49.99
+Calça Jeans,Roupas,99.99
+Blusa de Lã,Roupas,129.99
+Vestido Floral,Roupas,159.99
+Tênis Esportivo,Calçados,199.99
+Sandália Feminina,Calçados,89.99
+Bota de Couro,Calçados,299.99
+Chinelo de Borracha,Calçados,19.99
+Bola de Futebol,Esporte,79.99
+Raquete de Tênis,Esporte,399.99
+Halteres de Academia,Esporte,120.00
+Esteira Ergométrica,Esporte,2999.00
+Carrinho de Bebê,Infantil,599.99
+Brinquedo Educativo,Infantil,129.99
+Boneca de Pano,Infantil,49.99
+Triciclo Infantil,Infantil,199.99
+Kit de Ferramentas Automotivas,Automotivo,399.99
+Capa para Banco de Carro,Automotivo,149.99
+Pneu Aro 15,Automotivo,299.99
+Limpador Multiuso Automotivo,Automotivo,25.99
+Caneta Esferográfica,Papelaria,2.99
+Caderno Universitário,Papelaria,15.99
+Papel Sulfite 500 Folhas,Papelaria,29.99
+Mochila Escolar,Papelaria,99.99
+Monitor Full HD 24",Informática,999.99
+Teclado Mecânico,Informática,499.99
+Mouse Gamer RGB,Informática,299.99
+Impressora Multifuncional,Informática,899.99
+Ração para Cães 10kg,Pet Shop,129.99
+Ração para Gatos 5kg,Pet Shop,79.99
+Shampoo para Pets,Pet Shop,19.99
+Coleira Ajustável,Pet Shop,29.99
+Headphone Bluetooth,Eletrônicos,249.99
+Tablet Samsung,Eletrônicos,1499.99
+Câmera de Segurança,Eletrônicos,599.99
+Fogão 4 Bocas,Eletrodomésticos,1599.99
+Aspirador de Pó,Eletrodomésticos,749.99
+Máquina de Lavar Roupas,Eletrodomésticos,2999.99
+Protetor Solar FPS 50,Beleza,39.99
+Esmalte Vermelho,Beleza,9.99
+Kit Cuidados com a Pele,Beleza,89.99
+Máscara de Cílios,Beleza,19.99
+Farinha de Trigo 1kg,Alimentos,4.99
+Leite Integral 1L,Alimentos,4.49
+Achocolatado em Pó,Alimentos,9.99
+Biscoito Recheado,Alimentos,3.49
+Refrigerante 2L,Bebidas,6.99
+Energético 500ml,Bebidas,9.99
+Cachaça Artesanal,Bebidas,39.99
+Chá Verde 200ml,Bebidas,3.99
+Casaco de Inverno,Roupas,199.99
+Short de Praia,Roupas,79.99
+Meia Algodão,Roupas,14.99
+Gravata Social,Roupas,49.99
+Sapatênis Masculino,Calçados,159.99
+Rasteirinha Feminina,Calçados,69.99
+Coturno Militar,Calçados,399.99
+Pantufa de Lã,Calçados,49.99
+Kit de Pesca Completo,Esporte,599.99
+Bicicleta Mountain Bike,Esporte,1499.99
+Capacete de Ciclismo,Esporte,399.99
+Luvas de Boxe,Esporte,199.99
+Cadeira de Alimentação Infantil,Infantil,299.99
+Ursinho de Pelúcia,Infantil,59.99
+Livros Infantis,Infantil,79.99
+Kit de Massinhas de Modelar,Infantil,24.99
+Câmera de Ré Automotiva,Automotivo,199.99
+Caixa de Som Bluetooth,Automotivo,99.99
+Óleo Lubrificante,Automotivo,29.99
+Kit Lavagem a Seco,Automotivo,89.99
+Borracha Escolar,Papelaria,1.99
+Marcador de Texto,Papelaria,4.99
+Estojo Organizador,Papelaria,19.99
+Planner Anual,Papelaria,59.99
+Placa Mãe Gamer,Informática,1499.99
+Processador Intel i7,Informática,1999.99
+Cabo HDMI 2m,Informática,29.99
+SSD 1TB,Informática,499.99
+Antipulgas para Cães,Pet Shop,49.99
+Arranhador para Gatos,Pet Shop,99.99
+Bebedouro Automático,Pet Shop,149.99
+Roupa para Pets,Pet Shop,39.99
