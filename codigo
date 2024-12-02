@@ -1,0 +1,264 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define TABLE_SIZE 101 // Tamanho da tabela hash
+#define MAX_NAME 50    // Tamanho máximo do nome
+#define MAX_CAT 20     // Tamanho máximo da categoria
+#define FILE_NAME "produtos.txt" // Nome do arquivo com os produtos
+
+// Estrutura para representar um produto
+typedef struct Produto {
+    char nome[MAX_NAME];
+    char categoria[MAX_CAT];
+    float preco;
+    struct Produto *next; // Ponteiro para resolver colisões
+} Produto;
+
+// Tabela hash
+Produto *hashTable[TABLE_SIZE];
+
+// Função hash simples baseada no nome do produto
+unsigned int hash(char *key) {
+    unsigned int hashValue = 0;
+    while (*key)
+        hashValue = (hashValue * 31 + *key++) % TABLE_SIZE;
+    return hashValue;
+}
+
+// Inserção de um produto na tabela hash
+void inserirProduto(char *nome, char *categoria, float preco) {
+    unsigned int index = hash(nome);
+    Produto *novo = (Produto *)malloc(sizeof(Produto));
+    if (!novo) {
+        printf("Erro ao alocar memória.\n");
+        return;
+    }
+    strcpy(novo->nome, nome);
+    strcpy(novo->categoria, categoria);
+    novo->preco = preco;
+    novo->next = hashTable[index];
+    hashTable[index] = novo;
+    printf("Produto '%s' inserido com sucesso.\n", nome);
+}
+
+// Remoção de um produto
+void removerProduto(char *nome) {
+    unsigned int index = hash(nome);
+    Produto *current = hashTable[index];
+    Produto *prev = NULL;
+
+    while (current) {
+        if (strcmp(current->nome, nome) == 0) {
+            if (prev)
+                prev->next = current->next;
+            else
+                hashTable[index] = current->next;
+            free(current);
+            printf("Produto '%s' removido com sucesso.\n", nome);
+            return;
+        }
+        prev = current;
+        current = current->next;
+    }
+    printf("Produto '%s' não encontrado.\n", nome);
+}
+
+// Busca de um produto
+Produto *buscarProduto(char *nome) {
+    unsigned int index = hash(nome);
+    Produto *current = hashTable[index];
+
+    while (current) {
+        if (strcmp(current->nome, nome) == 0)
+            return current;
+        current = current->next;
+    }
+    return NULL;
+}
+
+// Carregar produtos de um arquivo
+void carregarProdutosDeArquivo(const char *fileName) {
+    FILE *file = fopen(fileName, "r");
+    if (!file) {
+        printf("Erro ao abrir o arquivo '%s'. Certifique-se de que ele existe.\n", fileName);
+        return;
+    }
+
+    char linha[256];
+    while (fgets(linha, sizeof(linha), file)) {
+        char nome[MAX_NAME], categoria[MAX_CAT];
+        float preco;
+
+        linha[strcspn(linha, "\n")] = '\0'; // Remove o caractere de nova linha
+        sscanf(linha, "%[^,],%[^,],%f", nome, categoria, &preco);
+
+        inserirProduto(nome, categoria, preco);
+    }
+
+    fclose(file);
+    printf("Produtos carregados do arquivo com sucesso.\n");
+}
+
+// Função para exibir produtos por categoria
+void exibirProdutosPorCategoria() {
+    printf("\n--- Produtos Cadastrados por Categoria ---\n");
+    
+    char *categorias[] = {
+        "Eletrônicos", "Eletrodomésticos", "Beleza", "Alimentos", 
+        "Bebidas", "Roupas", "Calçados", "Esporte", 
+        "Infantil", "Automotivo", "Papelaria", "Informática", "Pet Shop"
+    };
+    int numCategorias = sizeof(categorias) / sizeof(categorias[0]);
+
+    for (int c = 0; c < numCategorias; c++) {
+        printf("\nCategoria: %s\n", categorias[c]);
+        int encontrou = 0;
+
+        for (int i = 0; i < TABLE_SIZE; i++) {
+            Produto *current = hashTable[i];
+            while (current) {
+                if (strcmp(current->categoria, categorias[c]) == 0) {
+                    printf("  Nome: %s, Preço: %.2f\n", current->nome, current->preco);
+                    encontrou = 1;
+                }
+                current = current->next;
+            }
+        }
+        if (!encontrou) {
+            printf("  Nenhum produto nesta categoria.\n");
+        }
+    }
+
+    printf("------------------------------------------\n");
+}
+
+// Copiar produtos para um array
+int copiarProdutosParaArray(Produto **produtosArray) {
+    int count = 0;
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        Produto *current = hashTable[i];
+        while (current) {
+            produtosArray[count++] = current;
+            current = current->next;
+        }
+    }
+    return count;
+}
+
+// Ordenar produtos por nome (Método de Bolha)
+void ordenarPorNome() {
+    Produto *produtos[1000];
+    int n = copiarProdutosParaArray(produtos);
+
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (strcmp(produtos[j]->nome, produtos[j + 1]->nome) > 0) {
+                Produto *temp = produtos[j];
+                produtos[j] = produtos[j + 1];
+                produtos[j + 1] = temp;
+            }
+        }
+    }
+
+    printf("\n--- Produtos Ordenados por Nome ---\n");
+    for (int i = 0; i < n; i++) {
+        printf("Nome: %s, Categoria: %s, Preço: %.2f\n", produtos[i]->nome, produtos[i]->categoria, produtos[i]->preco);
+    }
+    printf("----------------------------------\n");
+}
+
+// Ordenar produtos por preço (Método de Seleção)
+void ordenarPorPreco() {
+    Produto *produtos[1000];
+    int n = copiarProdutosParaArray(produtos);
+
+    for (int i = 0; i < n - 1; i++) {
+        int minIndex = i;
+        for (int j = i + 1; j < n; j++) {
+            if (produtos[j]->preco < produtos[minIndex]->preco) {
+                minIndex = j;
+            }
+        }
+        if (minIndex != i) {
+            Produto *temp = produtos[i];
+            produtos[i] = produtos[minIndex];
+            produtos[minIndex] = temp;
+        }
+    }
+
+    printf("\n--- Produtos Ordenados por Preço ---\n");
+    for (int i = 0; i < n; i++) {
+        printf("Nome: %s, Categoria: %s, Preço: %.2f\n", produtos[i]->nome, produtos[i]->categoria, produtos[i]->preco);
+    }
+    printf("-----------------------------------\n");
+}
+
+// Menu principal
+void menu() {
+    int opcao;
+    char nome[MAX_NAME], categoria[MAX_CAT];
+    float preco;
+
+    do {
+        printf("\n--- Sistema de Gerenciamento de Produtos ---\n");
+        printf("1. Inserir produto\n");
+        printf("2. Remover produto\n");
+        printf("3. Buscar produto\n");
+        printf("4. Exibir produtos por categoria\n");
+        printf("5. Ordenar produtos por nome\n");
+        printf("6. Ordenar produtos por preço\n");
+        printf("7. Sair\n");
+        printf("Escolha uma opção: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                printf("Nome do produto: ");
+                scanf(" %[^\n]", nome);
+                printf("Categoria: ");
+                scanf(" %[^\n]", categoria);
+                printf("Preço: ");
+                scanf("%f", &preco);
+                inserirProduto(nome, categoria, preco);
+                break;
+            case 2:
+                printf("Nome do produto a ser removido: ");
+                scanf(" %[^\n]", nome);
+                removerProduto(nome);
+                break;
+            case 3:
+                printf("Nome do produto a ser buscado: ");
+                scanf(" %[^\n]", nome);
+                Produto *produto = buscarProduto(nome);
+                if (produto) {
+                    printf("Produto encontrado: Nome: %s, Categoria: %s, Preço: %.2f\n",
+                           produto->nome, produto->categoria, produto->preco);
+                } else {
+                    printf("Produto não encontrado.\n");
+                }
+                break;
+            case 4:
+                exibirProdutosPorCategoria();
+                break;
+            case 5:
+                ordenarPorNome();
+                break;
+            case 6:
+                ordenarPorPreco();
+                break;
+            case 7:
+                printf("Encerrando o sistema...\n");
+                break;
+            default:
+                printf("Opção inválida.\n");
+        }
+    } while (opcao != 7);
+}
+
+// Função principal
+int main() {
+    carregarProdutosDeArquivo(FILE_NAME);
+    menu();
+    return 0;
+}
